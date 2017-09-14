@@ -1,9 +1,6 @@
-FROM node:alpine
+FROM node:latest
 
-RUN apk add --no-cache python3 && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip \
-  && pip install awscli --upgrade --user \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install -y python-pip python-dev build-essential \
+    && pip install awscli --upgrade --user
 
 CMD [ "node" ]
